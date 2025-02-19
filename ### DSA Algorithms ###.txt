@@ -1,0 +1,152 @@
+### DSA Algorithms ###
+
+(1)Practical no 1
+
+Algorithm:
+Construction of Hash Table for Client telephone book:
+Algorithm: Insert_Linear Probe (int client_id) : function returns location of a key
+begin
+	int i, j;
+	j= client_id % TableSize;     // mapped location
+	for(i=0; i< TableSize; i++)
+	begin_for
+		if(hashtable[j] is empty) then  //empty cell found
+			begin_if
+			       hashtable[j] = client_record; 
+			       return(j);
+			end_if
+		j = (j+1) % TableSize;   //next location in circular way.
+	End_for
+//otherwise hash table is full
+return(-1);
+end
+
+Algorithm: Search_Linear Probe (int client_id) : function returns location of a key
+begin
+	int i, j;
+	j= client_id % TableSize;     // mapped location
+	for(i=0; i< TableSize; i++)
+	begin_for
+		if(hashtable[j].client_id ==client_id) then  //empty cell found
+			begin_if
+			  // record found 
+			       return(j);
+			end_if
+		j = (j+1) % TableSize;   //next location in circular way.
+	End_for
+//if record doesn’t exist
+return(-1);
+end
+
+
+(2)Practical no 4
+
+public void convert(Node  *root){
+        inorder(root, null);
+    }
+
+    public void inorder(Node *root, Node *previous)
+{
+        if(root==null)
+        {
+            return;
+        }
+    else{
+            inorder (root.right, previous);
+            if(root.right==null &&  previous!=null)
+            {
+                root.right = previous;
+                root.rightThread=true;
+            }
+            inorder(root.left, root);
+        }
+}
+Inorder traversal of Threaded Binary Tree: 
+  Node*  leftMostNode (Node *node){
+        if(node==null){
+            return null;
+        }else{
+            while(node->left!=null){
+                node = node->left;
+            }
+            return node;
+        }
+}
+void print(Node *root){
+        //first go to most left node
+        Node *current = leftMostNode(root);
+        //now travel using right pointers
+        while(current!=null){
+            cout<<current->data;
+            //check if node has a right thread
+            if(current->rightThread)
+                current = current->right;
+            else // else go to left most node in the right subtree
+                current = leftMostNode(current->right);
+        }
+}
+
+(3)Practical no 5
+
+Algorithm:
+Construction of Adjacency Matrix:
+Algorithm: InsertMatrix (Source Vertex, End Vertex)
+1.	If type of a graph is Directed then
+1.1.	Graph[SourceVertex][DestinationVertex]=1
+1.2.	Return
+2.	Else 
+2.1.	Graph [SourceVertex] [DestinationVertex] =1
+2.2.	Graph [DestinationVertex] [ SourceVertex] =1
+End.
+
+Construction of Adjacency List:
+Algorithm: InsertNodeInList(Source Vertex, End Vertex)
+1. Create NewNode dynamically.
+1.1.  If HeadArray[Vertex] is empty then
+1.1.1. Assign NewNode to HeadArray[Vertex].
+1.2. Else
+1.2.1. Traverse till Adjacency List’s end.
+1.2.2. Assign NewNode at the end of HeadArray[Vertex] list.
+End.
+
+Practical no 6
+
+Algorithm:
+Construction of Minimum Spanning Tree by Prim’s Method:
+Algorithm: InsertMatrix (Source Vertex, End Vertex)
+
+Let the graph G=(V, E) has n vertices.
+1.	Choose a vertex V1 of G.  let VT ={V1} and ET  ={ }.
+
+2.	Choose a nearest neighbor Vi  of VT  that is adjacent to Vj,  Vj  belongs to VT   and for which the edge (Vi,  Vj) does not form a cycle with members of ET.   Add Vi  to  VT  and add (Vi,  Vj) to ET.
+
+3.	Repeat step 2 until | ET | = n-1. Then VT contains all n vertices of G and ET contains the edges of the minimum cost spanning tree of G.
+
+(4)Practical no 7
+
+Algorithm:
+1. Rotate Right 
+AVLNode *AVL::rotate_right(AVLNode *x)
+{
+cout<<"\nright Rotate";
+AVLNode *y;
+y=x->left;
+x->left=y->right;
+y->right=x;
+x->ht=height(x);
+y->ht=height(y);
+return(y);
+}
+2. Rotate Left
+AVLNode *AVL::rotate_left(AVLNode *x)
+ {
+  cout<<"\nleft Rotate";
+  AVLNode *y;
+  y=x->right;
+  x->right=y->left;
+  y->left=x;
+  x->ht=height(x);
+  y->ht=height(y);
+  return(y);
+ }
+
